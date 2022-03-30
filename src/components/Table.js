@@ -7,6 +7,9 @@ function Table() {
     data,
     setData,
     filterByName,
+    filterByNumber,
+    planetsFiltered,
+    setPlanetsFiltered,
   } = useContext(StarwarsContext);
 
   useEffect(() => {
@@ -17,6 +20,20 @@ function Table() {
     }
     getPlanets();
   }, [setData]);
+
+  useEffect(() => {
+    const newData = data.filter((planet) => (
+      filterByNumber.every((filter) => {
+        if (filter.comparison === 'maior que') {
+          return +planet[filter.column] > +filter.value;
+        } if (filter.comparison === 'menor que') {
+          return +planet[filter.column] < +filter.value;
+        }
+        return +planet[filter.column] === +filter.value;
+      })
+    ));
+    setPlanetsFiltered(newData);
+  }, [data, filterByNumber, setPlanetsFiltered]);
 
   const headers = ['Name', 'Rotation Period', 'Orbital Period', 'Diameter', 'Climate',
     'Gravity', 'Terrain', 'Surface Water', 'Population', 'Films', 'Created', 'Edited',
@@ -30,7 +47,8 @@ function Table() {
         </tr>
       </thead>
       <tbody>
-        {data.filter((planet) => planet.name.toLowerCase().includes(filterByName.name))
+        {planetsFiltered
+          .filter((planet) => planet.name.toLowerCase().includes(filterByName.name))
           .map((planet) => (
             <tr key={ planet.name }>
               {Object.values(planet).map((item) => <td key={ item }>{item}</td>)}

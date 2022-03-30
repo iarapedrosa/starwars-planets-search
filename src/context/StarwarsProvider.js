@@ -7,11 +7,27 @@ function StarwarsProvider({ children }) {
 
   const [filterByName, setFilterByName] = useState({ name: '' });
 
+  const [filterByNumber, setFilterByNumber] = useState([]);
+
+  const [actualNumberFilter, setActualNumberFilter] = useState({
+    column: '',
+    comparison: '',
+    value: 0,
+  });
+
+  const [planetsFiltered, setPlanetsFiltered] = useState([]);
+
   const contextData = {
     data,
     setData,
     filterByName,
     setFilterByName,
+    filterByNumber,
+    setFilterByNumber,
+    planetsFiltered,
+    setPlanetsFiltered,
+    actualNumberFilter,
+    setActualNumberFilter,
   };
 
   return (
