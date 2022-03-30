@@ -17,6 +17,8 @@ function StarwarsProvider({ children }) {
 
   const [planetsFiltered, setPlanetsFiltered] = useState([]);
 
+  const [columnsName, setColumnsName] = useState([]);
+
   const contextData = {
     data,
     setData,
@@ -28,6 +30,8 @@ function StarwarsProvider({ children }) {
     setPlanetsFiltered,
     actualNumberFilter,
     setActualNumberFilter,
+    columnsName,
+    setColumnsName,
   };
 
   return (

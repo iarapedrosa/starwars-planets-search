@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import StarwarsContext from '../context/StarwarsContext';
 
 function FiltersHeader() {
@@ -8,6 +8,8 @@ function FiltersHeader() {
     setFilterByNumber,
     actualNumberFilter,
     setActualNumberFilter,
+    columnsName,
+    setColumnsName,
   } = useContext(StarwarsContext);
 
   const handleChangeName = ({ target }) => {
@@ -19,6 +21,21 @@ function FiltersHeader() {
   const handleChangeNumber = ({ target }) => {
     setActualNumberFilter({ ...actualNumberFilter, [target.name]: target.value });
   };
+
+  /* const setActualColumns = () => {
+    const actualColumns = filterByNumber.map[filterByNumber.column];
+    return actualColumns;
+    /* let actualColumns = [];
+    filterByNumber.map((element) => {
+      return actualColumns: [...element];
+    });
+  }; */
+
+  useEffect(() => {
+    const actualColumnsName = filterByNumber
+      .map((filter) => filter.column);
+    setColumnsName(actualColumnsName);
+  }, [filterByNumber, setColumnsName]);
 
   const columns = ['population', 'orbital_period', 'diameter',
     'rotation_period', 'surface_water'];
@@ -47,9 +64,10 @@ function FiltersHeader() {
           name="column"
           onChange={ handleChangeNumber }
         >
-          {columns.map((column) => (
-            <option key={ column }>{column}</option>
-          ))}
+          {columns.filter((column) => !columnsName.includes(column))
+            .map((column) => (
+              <option key={ column }>{column}</option>
+            ))}
         </select>
         <select
           data-testid="comparison-filter"
