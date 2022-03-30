@@ -10,8 +10,8 @@ function StarwarsProvider({ children }) {
   const [filterByNumber, setFilterByNumber] = useState([]);
 
   const [actualNumberFilter, setActualNumberFilter] = useState({
-    column: '',
-    comparison: '',
+    column: 'population',
+    comparison: 'maior que',
     value: 0,
   });
 
