@@ -7,13 +7,15 @@ import topo from './images/grafismo-topo.svg';
 
 function App() {
   return (
-    <section className="background">
+    <section>
       <div className="grafismo">
         <img src={ topo } alt="grafismo do topo" />
       </div>
       <StarwarsProvider>
-        <FiltersHeader />
-        <Table />
+        <div className="tableBox">
+          <FiltersHeader />
+          <Table />
+        </div>
       </StarwarsProvider>
     </section>
   );
