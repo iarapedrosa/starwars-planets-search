@@ -1,6 +1,7 @@
 import React, { useContext, useEffect } from 'react';
 import StarwarsContext from '../context/StarwarsContext';
 import fetchPlanets from '../services/fetchPlanets';
+import styles from './style/Table.module.css';
 
 function Table() {
   const {
@@ -40,21 +41,23 @@ function Table() {
     'URL'];
 
   return (
-    <table>
-      <thead>
-        <tr>
-          {headers.map((header) => <th key={ header }>{header}</th>)}
-        </tr>
-      </thead>
-      <tbody>
-        {planetsFiltered
-          .filter((planet) => planet.name.toLowerCase().includes(filterByName.name))
-          .map((planet) => (
-            <tr key={ planet.name }>
-              {Object.values(planet).map((item) => <td key={ item }>{item}</td>)}
-            </tr>))}
-      </tbody>
-    </table>
+    <div className={ styles.tableContent }>
+      <table>
+        <thead>
+          <tr>
+            {headers.map((header) => <th key={ header }>{header}</th>)}
+          </tr>
+        </thead>
+        <tbody>
+          {planetsFiltered
+            .filter((planet) => planet.name.toLowerCase().includes(filterByName.name))
+            .map((planet) => (
+              <tr key={ planet.name }>
+                {Object.values(planet).map((item) => <td key={ item }>{item}</td>)}
+              </tr>))}
+        </tbody>
+      </table>
+    </div>
   );
 }
 
